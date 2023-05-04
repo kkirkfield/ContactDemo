@@ -32,7 +32,7 @@ jobs:
         run: dotnet tool restore
 
       - name: dotnet bundle migration
-        run: dotnet ef migrations bundle -p ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate -v
+        run: dotnet ef migrations bundle -p ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate -r linux-x64 --no-build -v
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
