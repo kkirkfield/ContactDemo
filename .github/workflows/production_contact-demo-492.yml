@@ -22,23 +22,26 @@ jobs:
           dotnet-version: '7.x'
           include-prerelease: true
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: dotnet restore
+        run: dotnet restore -r linux-x64
+
+      - name: dotnet build
+        run: dotnet build ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -c Release -r linux-x64 --no-self-contained --no-restore
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -c Release -r linux-x64 --no-self-contained --no-restore --no-build -o ${{env.DOTNET_ROOT}}/app
 
       - name: dotnet tool restore
         run: dotnet tool restore
 
       - name: dotnet bundle migration
-        run: dotnet ef migrations bundle -p ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate -r linux-x64 --no-build -v
+        run: dotnet ef migrations bundle -p ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -s ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj --configuration Release -o ${{env.DOTNET_ROOT}}/app/migrate -r linux-x64 -v
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/app
 
   deploy:
     runs-on: ubuntu-latest
