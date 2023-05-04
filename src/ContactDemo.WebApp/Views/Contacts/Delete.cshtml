@@ -1,0 +1,26 @@
+﻿@model ContactDemo.Domain.Models.Contact
+
+@{
+    ViewData["Title"] = "Delete Contact";
+}
+
+<h2 class="text-center mb-4">Are you sure you want to delete this contact?</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4 mx-auto">
+        <h3>@Html.DisplayFor(_ => Model.FullName)</h3>
+        @if (Model.Address is not null)
+        {
+            <p class="mb-0">@Html.DisplayFor(_ => Model.Address.Street)</p>
+            <p class="mb-0">@Html.DisplayFor(_ => Model.Address.City)</p>
+            <p class="mb-0">@Html.DisplayFor(_ => Model.Address.State)</p>
+            <p class="mb-0">@Html.DisplayFor(_ => Model.Address.PostalCode)</p>
+        }
+    </div>
+</div>
+
+<form asp-action="Delete">
+    @Html.HiddenFor(c => c.ID)
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-link">Cancel</a>
+</form>

@@ -1,0 +1,59 @@
+﻿@model ContactDemo.Domain.Models.Contact
+
+@{
+    ViewData["Title"] = "Edit Contact";
+}
+
+<h2 class="text-center mb-4">Edit existing contact</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="Edit">
+            @Html.HiddenFor(c => c.Address!.ContactID)
+            <div asp-validation-summary="ModelOnly" class="mb-4 text-danger"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="FirstName" class="form-control mb-1" placeholder="FirstName">
+                <label asp-for="FirstName"></label>
+                <span asp-validation-for="FirstName" class="d-block text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="LastName" class="form-control mb-1" placeholder="LastName">
+                <label asp-for="LastName"></label>
+                <span asp-validation-for="LastName" class="d-block text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Address!.Street" class="form-control mb-1" placeholder="Address!.Street">
+                <label asp-for="Address!.Street"></label>
+                <span asp-validation-for="Address!.Street" class="d-block text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Address!.City" class="form-control mb-1" placeholder="Address!.City">
+                <label asp-for="Address!.City"></label>
+                <span asp-validation-for="Address!.City" class="d-block text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Address!.State" class="form-control mb-1" placeholder="Address!.State">
+                <label asp-for="Address!.State"></label>
+                <span asp-validation-for="Address!.State" class="d-block text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Address!.PostalCode" class="form-control mb-1" placeholder="Address!.PostalCode">
+                <label asp-for="Address!.PostalCode"></label>
+                <span asp-validation-for="Address!.PostalCode" class="d-block text-danger"></span>
+            </div>
+            <div class="d-grid">
+                <input type="submit" value="Save" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ContactDemo.Domain.Models.Contact>
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<h2 class="text-center mb-4">Contacts</h2>
+
+<div class="row mb-4">
+    <div class="col-12 col-md-6 d-grid d-md-block mb-5">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </div>
+    <div class="col-12 col-md-6">
+        <form method="get">
+            <p>
+                <input type="text" name="searchString">
+                <input type="submit" value="Filter" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var contact in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">@Html.DisplayFor(_ => contact.FullName)</h3>
+                    @if (contact.Address is not null)
+                    {
+                        <p class="card-text mb-0">@Html.DisplayFor(_ => contact.Address.Street)</p>
+                        <p class="card-text mb-0">@Html.DisplayFor(_ => contact.Address.City)</p>
+                        <p class="card-text mb-0">@Html.DisplayFor(_ => contact.Address.State)</p>
+                        <p class="card-text mb-0">@Html.DisplayFor(_ => contact.Address.PostalCode)</p>
+                    }
+                </div>
+                <div class="card-body">
+                    <a asp-action="Edit" asp-route-id="@contact.ID" class="card-link">Edit</a>
+                    <a asp-action="Details" asp-route-id="@contact.ID" class="card-link">Details</a>
+                    <a asp-action="Delete" asp-route-id="@contact.ID" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

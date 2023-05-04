@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Generate Hash";
+}
+
+<h2 class="text-center mb-4">Generate Hash</h2>
+
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        @if (ViewData.ContainsKey("HashedPassword"))
+        {
+            <p>Copy this hash into application settings.</p>
+            <p class="text-break">Hashed Password: @ViewData["HashedPassword"]</p>
+        }
+        else
+        {
+            <p>A hashed password must be configured to enable authentication. See instructions in the repository for help.</p>
+            <form asp-action="Hash">
+                <div class="form-floating mb-3">
+                    <input id="password" name="password" class="form-control" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="d-grid">
+                    <input type="submit" value="Generate" class="btn btn-primary">
+                </div>
+            </form>
+        }
+    </div>
+</div>
