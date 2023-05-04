@@ -37,6 +37,9 @@ jobs:
       - name: dotnet bundle migration
         run: dotnet ef migrations bundle -p ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj -s ./src/ContactDemo.WebApp/ContactDemo.WebApp.csproj --configuration Release -o ${{env.DOTNET_ROOT}}/app/migrate -r linux-x64 -v
 
+      - name: list publish output
+        run: ls -r ${{env.DOTNET_ROOT}}/app
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
