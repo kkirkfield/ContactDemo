@@ -14,7 +14,7 @@ Clean Architecture could be implemented to further improve the separation of con
 
 ## Live Demo
 
-This demo application is available [live](). You will be provided a password to access the application ahead of time.
+This demo application is available [live](https://contact-demo-492.azurewebsites.net/Contacts/Index). You will be provided a password to access the application ahead of time.
 
 ## Local Demo
 
